@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		43869A28214EC7050071D3CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43869A27214EC7050071D3CE /* AppDelegate.swift */; };
-		43869A2A214EC7050071D3CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43869A29214EC7050071D3CE /* ViewController.swift */; };
+		43869A2A214EC7050071D3CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43869A29214EC7050071D3CE /* MainViewController.swift */; };
 		43869A2D214EC7050071D3CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43869A2B214EC7050071D3CE /* Main.storyboard */; };
 		43869A30214EC7050071D3CE /* ImagePlusLines.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43869A2E214EC7050071D3CE /* ImagePlusLines.xcdatamodeld */; };
 		43869A32214EC7060071D3CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43869A31214EC7060071D3CE /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 /* Begin PBXFileReference section */
 		43869A24214EC7050071D3CE /* ImagePlusLines.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePlusLines.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43869A27214EC7050071D3CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		43869A29214EC7050071D3CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		43869A29214EC7050071D3CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		43869A2C214EC7050071D3CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43869A2F214EC7050071D3CE /* ImagePlusLines.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImagePlusLines.xcdatamodel; sourceTree = "<group>"; };
 		43869A31214EC7060071D3CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,13 +99,9 @@
 		43869A26214EC7050071D3CE /* ImagePlusLines */ = {
 			isa = PBXGroup;
 			children = (
-				43869A27214EC7050071D3CE /* AppDelegate.swift */,
-				43869A29214EC7050071D3CE /* ViewController.swift */,
-				43869A2B214EC7050071D3CE /* Main.storyboard */,
-				43869A31214EC7060071D3CE /* Assets.xcassets */,
-				43869A33214EC7060071D3CE /* LaunchScreen.storyboard */,
+				43869A59214EC7A70071D3CE /* Sources */,
+				43869A58214EC7A00071D3CE /* Resources */,
 				43869A36214EC7060071D3CE /* Info.plist */,
-				43869A2E214EC7050071D3CE /* ImagePlusLines.xcdatamodeld */,
 			);
 			path = ImagePlusLines;
 			sourceTree = "<group>";
@@ -126,6 +122,50 @@
 				43869A4C214EC7070071D3CE /* Info.plist */,
 			);
 			path = ImagePlusLinesUITests;
+			sourceTree = "<group>";
+		};
+		43869A58214EC7A00071D3CE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				43869A2E214EC7050071D3CE /* ImagePlusLines.xcdatamodeld */,
+				43869A2B214EC7050071D3CE /* Main.storyboard */,
+				43869A31214EC7060071D3CE /* Assets.xcassets */,
+				43869A33214EC7060071D3CE /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		43869A59214EC7A70071D3CE /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				43869A27214EC7050071D3CE /* AppDelegate.swift */,
+				43869A5C214EC7C80071D3CE /* Services */,
+				43869A5B214EC7C10071D3CE /* Views */,
+				43869A5A214EC7B60071D3CE /* Controllers */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		43869A5A214EC7B60071D3CE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				43869A29214EC7050071D3CE /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		43869A5B214EC7C10071D3CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		43869A5C214EC7C80071D3CE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,13 +236,16 @@
 				TargetAttributes = {
 					43869A23214EC7050071D3CE = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					43869A3A214EC7070071D3CE = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 43869A23214EC7050071D3CE;
 					};
 					43869A45214EC7070071D3CE = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 43869A23214EC7050071D3CE;
 					};
 				};
@@ -259,7 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43869A2A214EC7050071D3CE /* ViewController.swift in Sources */,
+				43869A2A214EC7050071D3CE /* MainViewController.swift in Sources */,
 				43869A30214EC7050071D3CE /* ImagePlusLines.xcdatamodeld in Sources */,
 				43869A28214EC7050071D3CE /* AppDelegate.swift in Sources */,
 			);
@@ -443,7 +486,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = zippo.ImagePlusLines;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -461,7 +504,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = zippo.ImagePlusLines;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -481,7 +524,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = zippo.ImagePlusLinesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImagePlusLines.app/ImagePlusLines";
 			};
@@ -502,7 +545,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = zippo.ImagePlusLinesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImagePlusLines.app/ImagePlusLines";
 			};
@@ -522,7 +565,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = zippo.ImagePlusLinesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ImagePlusLines;
 			};
@@ -542,7 +585,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = zippo.ImagePlusLinesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ImagePlusLines;
 			};
