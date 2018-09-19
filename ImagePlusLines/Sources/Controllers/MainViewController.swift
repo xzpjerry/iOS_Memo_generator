@@ -18,22 +18,23 @@ class MainViewController: UIViewController {
     }
     
     private let font_name = "TimesNewRomanPS-BoldMT"
-    private let defaultTextSize = 40
+    private let defaultTextSize = 30
     private let maxTextSize = 58
     private let minTextSize = 22
     private let resizeMemeMaxSize:CGFloat = 700
+    private var original_image : UIImage!
     
     var current_top_size : Int!
     var current_btm_size : Int!
     
     private func render_this() {
-        guard let image = imageView.image else {
+        guard imageView.image != nil else {
             return
         }
         let top_text = ToptextField.text ?? ""
         let btm_text = BtmtextField.text ?? ""
         
-        imageView.image = applyTextOnMeme(inMeme: image, withTopText: top_text, withBottomText: btm_text, withTopTextSize: current_top_size, withBottomTextSize: current_btm_size)
+        imageView.image = applyTextOnMeme(inMeme: original_image, withTopText: top_text, withBottomText: btm_text, withTopTextSize: current_top_size, withBottomTextSize: current_btm_size)
         
     }
     
@@ -108,32 +109,80 @@ class MainViewController: UIViewController {
     }
 }
 
+extension MainViewController : UITextFieldDelegate {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+}
+
+// MARK: Handling tap gesture
+extension MainViewController {
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
+    @IBAction func tap2save(_ gestureRecognizer : UITapGestureRecognizer ) {
+        guard gestureRecognizer.view != nil else { return }
+        if gestureRecognizer.state == .ended {
+            // Move the view down and to the right when tapped.
+//            let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut, animations: {
+//                gestureRecognizer.view!.center.x += 100
+//                gestureRecognizer.view!.center.y += 100
+//            })
+//            animator.startAnimation()
+            guard let image = imageView.image, image != UIImage(named: "Default_image")! else {
+                let ac = UIAlertController(title: "Save error", message: "You need to choose an image first.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+                return
+            }
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
+    }
+    
+    @IBAction func tap2dissKeyboard(_ gestureRecognizer : UITapGestureRecognizer ) {
+        guard gestureRecognizer.view != nil else { return }
+        ToptextField.resignFirstResponder()
+        BtmtextField.resignFirstResponder()
+    }
+}
+
+
 // MARK: Handling font size change signals
 extension MainViewController {
-    @objc func topplus() {
-        guard imageView.image != nil, current_top_size != maxTextSize else {
+    @objc @IBAction func topplus() {
+        guard imageView.image != nil, current_top_size < maxTextSize else {
             return
         }
         current_top_size += 1
         render_this()
     }
-    @objc func topminus() {
-        guard imageView.image != nil, current_top_size != minTextSize else {
+    @objc @IBAction func topminus() {
+        guard imageView.image != nil, current_top_size > minTextSize else {
             return
         }
         current_top_size -= 1
         render_this()
     }
     
-    @objc func btmplus() {
-        guard imageView.image != nil, current_top_size != maxTextSize else {
+    @objc @IBAction func btmplus() {
+        guard imageView.image != nil, current_top_size < maxTextSize else {
             return
         }
         current_btm_size += 1
         render_this()
     }
-    @objc func btmminus() {
-        guard imageView.image != nil, current_top_size != minTextSize else {
+    @objc @IBAction func btmminus() {
+        guard imageView.image != nil, current_top_size > minTextSize else {
             return
         }
         current_btm_size -= 1
@@ -141,6 +190,9 @@ extension MainViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        ToptextField.delegate = self
+        BtmtextField.delegate = self
+        
         current_top_size = defaultTextSize
         current_btm_size = defaultTextSize
         
@@ -177,6 +229,7 @@ extension MainViewController : UIImagePickerControllerDelegate {
         // First check for an edited image, then the original image
         if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             imageView.image = image
+            original_image = image
         }
         
         dismiss(animated: true, completion: nil)
